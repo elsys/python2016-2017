@@ -68,14 +68,30 @@ class Deck:
 
 	def add_card(self, card):
 		return self.cards.append(card)
-		
+	
+	def is_empty(self):
+		return len(self.cards) == 0
+
+class Hand(Deck):
+	
+	def __init__(self, label):
+		self.label = label
+		self.cards = []
+
+	
+
 
 if __name__ == "__main__":
 	print(__name__)
-	d = Deck()
+	# d = Deck()
 	# d.print_deck()
 
-	print(d)
+	# print(d)
+	h = Hand("player1")
+	# print(h)
+	print(h.is_empty())
+
+	
 	
 
 

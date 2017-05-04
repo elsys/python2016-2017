@@ -1,6 +1,6 @@
 import unittest
 
-from cards import Card, Deck
+from cards import Card, Deck, Hand
 
 
 
@@ -67,7 +67,14 @@ class DeckTest(unittest.TestCase):
 		d.add_card(card)
 		self.assertEqual(52, len(d.cards))
 				
-	
+
+class HandTest(unittest.TestCase):
+
+	def testEmptyHand(self):
+		h = Hand("test player")
+		self.assertTrue(h.is_empty())
+
+
 unittest.main()
 
 
