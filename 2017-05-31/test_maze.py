@@ -33,6 +33,23 @@ class BoardTest(unittest.TestCase):
 		self.assertEqual(4, c.row)
 		self.assertEqual(3, c.col)
 		
+	def test_has_wall(self):
+		c = self.board[1, 1]
+		self.assertTrue(c.has_wall(maze.Cell.UP))
+		self.assertTrue(c.has_wall(maze.Cell.DOWN))
+
+	def test_drill_build_wall(self):
+		c = self.board[1, 1]
+		
+		self.assertTrue(c.has_wall(maze.Cell.UP))
+		
+		c.drill_wall(maze.Cell.UP)
+		self.assertFalse(c.has_wall(maze.Cell.UP))
+
+		c.build_wall(maze.Cell.UP)
+		self.assertTrue(c.has_wall(maze.Cell.UP))
+		
+
 
 if __name__=="__main__":
 	unittest.main()
