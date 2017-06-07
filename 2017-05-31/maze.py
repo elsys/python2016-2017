@@ -13,6 +13,7 @@ class Cell(object):
 		self.row = row
 		self.col = col
 		self.walls = [True, True, True, True]
+		self.visited = False
 
 	@staticmethod
 	def oposite_direction(direction):
@@ -43,7 +44,10 @@ class Cell(object):
 			turtle.forward(self.STEP)
 			turtle.left(90)
 		turtle.penup()
-			
+	
+	def set_visited(self, visited=True):
+		self.visited = visited
+
 
 class Board(object):
 	
@@ -93,6 +97,14 @@ class Board(object):
 		if neighbour is not None:
 			oposite = Cell.oposite_direction(direction)
 			neighbour.drill_wall(oposite)
+
+	def get_unvisited_neighbours(self, cell):
+		neighbours = []
+		for direction in range(4):
+			neighbour = self.get_neighbour(cell, direction)
+			if neighbour is not None and not neighbour.visited:
+				neighbours.append(neighbour)
+		return neighbours
 
 
 if __name__=="__main__":

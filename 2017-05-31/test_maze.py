@@ -68,6 +68,21 @@ class BoardTest(unittest.TestCase):
 		self.assertEqual(n.col, 1)
 
 
+	def test_unvisited_neighbours(self):
+		c = self.board[0,0]
+		neighbours = self.board.get_unvisited_neighbours(c)
+		self.assertEqual(2, len(neighbours))
+
+		c = self.board[1,1]
+		neighbours = self.board.get_unvisited_neighbours(c)
+		self.assertEqual(4, len(neighbours))
+		
+		
+		self.board[0,1].set_visited()
+		neighbours = self.board.get_unvisited_neighbours(c)
+		self.assertEqual(3, len(neighbours))
+		
+
 if __name__=="__main__":
 	unittest.main()
 
