@@ -29,8 +29,17 @@ class Cell(object):
 	def draw(self):
 		turtle.goto(self.col*self.STEP, self.row*self.STEP)
 		turtle.setheading(270)
-		# TODO
-
+		for direction in range(4):
+			if self.has_wall(direction):
+				# draw wall
+				turtle.pendown()
+			else:
+				# no wall
+				turtle.penup()
+			turtle.forward(self.STEP)
+			turtle.left(90)
+		turtle.penup()
+			
 
 class Board(object):
 	
@@ -50,12 +59,19 @@ class Board(object):
 		return self.cells[n * self.cols + m]
 
 	def draw(self):
-		pass
-		# TODO
+		for row in range(self.rows):
+			for col in range(self.cols):
+				cell=self[row,col]
+				cell.draw()
 		
 
 
 if __name__=="__main__":
-	b = Board(10, 10)
+	turtle.speed(0)
+	turtle.hideturtle()
+	
+	b = Board(5, 6)
 	b.draw()
+	
+	input("Please enter something: ")
 
