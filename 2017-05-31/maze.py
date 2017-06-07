@@ -63,8 +63,25 @@ class Board(object):
 			for col in range(self.cols):
 				cell=self[row,col]
 				cell.draw()
-		
 
+	def get_neighbour(self, cell, direction):
+		assert Cell.LEFT <= direction and direction <= Cell.UP
+		if direction == Cell.LEFT:
+			row = cell.row
+			col = cell.col - 1
+		elif direction == Cell.RIGHT:
+			row = cell.row
+			col = cell.col + 1
+		elif direction == Cell.UP:
+			row = cell.row + 1
+			col = cell.col
+		elif direction == Cell.DOWN:
+			row = cell.row - 1
+			col = cell.col
+		if row < 0 or row >= self.rows or \
+				col < 0 or col >= self.cols:
+			return None
+		return self[row, col]
 
 if __name__=="__main__":
 	turtle.speed(0)

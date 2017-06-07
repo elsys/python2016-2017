@@ -49,6 +49,10 @@ class BoardTest(unittest.TestCase):
 		c.build_wall(maze.Cell.UP)
 		self.assertTrue(c.has_wall(maze.Cell.UP))
 		
+	def test_get_neighbour(self):
+		c = self.board[0,0]
+		n = self.board.get_neighbour(c, maze.Cell.LEFT)
+		self.assertIsNone(n)
 
 
 if __name__=="__main__":
