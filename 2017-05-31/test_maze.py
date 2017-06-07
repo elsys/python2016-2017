@@ -54,6 +54,19 @@ class BoardTest(unittest.TestCase):
 		n = self.board.get_neighbour(c, maze.Cell.LEFT)
 		self.assertIsNone(n)
 
+		n = self.board.get_neighbour(c, maze.Cell.DOWN)
+		self.assertIsNone(n)
+		
+		n = self.board.get_neighbour(c, maze.Cell.UP)
+		self.assertTrue(n)
+		self.assertEqual(n.row, 1)
+		self.assertEqual(n.col, 0)
+		
+		n = self.board.get_neighbour(c, maze.Cell.RIGHT)
+		self.assertTrue(n)
+		self.assertEqual(n.row, 0)
+		self.assertEqual(n.col, 1)
+
 
 if __name__=="__main__":
 	unittest.main()

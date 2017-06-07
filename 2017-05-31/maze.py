@@ -14,6 +14,10 @@ class Cell(object):
 		self.col = col
 		self.walls = [True, True, True, True]
 
+	@staticmethod
+	def oposite_direction(direction):
+		return (direction + 2) % 4
+
 	def has_wall(self, direction):
 		assert self.LEFT <= direction and direction <= self.UP
 		return self.walls[direction]
@@ -83,12 +87,24 @@ class Board(object):
 			return None
 		return self[row, col]
 
+	def drill_wall(self, cell, direction):
+		cell.drill_wall(direction)
+		neighbour = self.get_neighbour(cell, direction)
+		if neighbour is not None:
+			oposite = Cell.oposite_direction(direction)
+			neighbour.drill_wall(oposite)
+
+
 if __name__=="__main__":
 	turtle.speed(0)
 	turtle.hideturtle()
 	
 	b = Board(5, 6)
+	c = b[0,0]
+	b.drill_wall(c, Cell.UP)
+
 	b.draw()
+
 	
 	input("Please enter something: ")
 
