@@ -1,5 +1,5 @@
 import turtle
-
+import random
 
 class Cell(object):
 	STEP = 20
@@ -97,23 +97,37 @@ class Board(object):
 		if neighbour is not None:
 			oposite = Cell.oposite_direction(direction)
 			neighbour.drill_wall(oposite)
+		return neighbour
 
 	def get_unvisited_neighbours(self, cell):
 		neighbours = []
 		for direction in range(4):
 			neighbour = self.get_neighbour(cell, direction)
 			if neighbour is not None and not neighbour.visited:
-				neighbours.append(neighbour)
+				neighbours.append(direction)
 		return neighbours
 
+	def generate(self, cell):
+		cell.set_visited()
+		
+		while True:
+			neighbours = self.get_unvisited_neighbours(cell)
+			if not neighbours:
+				return
+			direction = random.choice(neighbours)
+			next = self.drill_wall(cell, direction)
+			self.generate(next)
+
+		
 
 if __name__=="__main__":
 	turtle.speed(0)
 	turtle.hideturtle()
 	
-	b = Board(5, 6)
+	b = Board(10, 12)
 	c = b[0,0]
-	b.drill_wall(c, Cell.UP)
+
+	b.generate(c)
 
 	b.draw()
 
